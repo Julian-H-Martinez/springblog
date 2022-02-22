@@ -28,7 +28,8 @@ public class MathController {
     @GetMapping("/divide/{num}/by/{num2}")
     @ResponseBody
     public String divide(@PathVariable int num, @PathVariable int num2){
-        return num + " divided by " + num2 + " equals: " + (num / num2);
+        return String.format("<h1>%d divided by %d equals: %d</h1>", num, num2, (num/num2));
+//        return num + " divided by " + num2 + " equals: " + (num / num2);
     }
 
 }
