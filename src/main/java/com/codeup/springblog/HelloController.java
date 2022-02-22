@@ -43,4 +43,3 @@ public class HelloController {
 }
 
 
-// start with webpattern -> @Controller == @WebServlet(name="", urlPatter="/")
