@@ -11,26 +11,26 @@ public class PostController {
 
     @GetMapping("/posts")
     @ResponseBody
-    public String post(){
-        return "Posting something here";
+    public String viewPost(){
+        return "Viewing Index of all Posts";
     }
 
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String postId(@PathVariable int id){
-        return "This is post number: " + id;
+    public String postDetails(@PathVariable long id){
+        return "Individual Post Number: " + id;
     }
 
     @GetMapping("/posts/create")
     @ResponseBody
-    public String createPost(){
-        return "Creating a post";
+    public String showCreateForm(){
+        return "Viewing the form to create post";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String postCreated(){
-        return "post has been created";
+    public String postCreateForm(){
+        return "create new post";
     }
 
 }
