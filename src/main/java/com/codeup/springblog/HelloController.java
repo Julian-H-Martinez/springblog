@@ -12,11 +12,17 @@ public class HelloController {
 
     //  urlPattern that we are using
     //  defines a method that should be invoked when a GET request is received for the specified URI
+//    @GetMapping("/hello")
+//    //  tells Spring that whatever is returned from this method should be the body of our response
+//    @ResponseBody
+//    public String hello(){
+//        return "<h1>Hello from Spring!</h1>";
+//    }
+
     @GetMapping("/hello")
     //  tells Spring that whatever is returned from this method should be the body of our response
-    @ResponseBody
     public String hello(){
-        return "<h1>Hello from Spring!</h1>";
+        return "hello";
     }
 
     @GetMapping("/test")
