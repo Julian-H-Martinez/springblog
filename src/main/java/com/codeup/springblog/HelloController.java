@@ -65,6 +65,12 @@ public class HelloController {
         return "join";
     }
 
+    @GetMapping("/roll-dice")
+    public String rollDice(){
+
+        return "/roll-dice";
+    }
+
 }
 
 
