@@ -5,8 +5,9 @@
     <title>Show All Posts</title>
 </head>
 <body>
+<!--REFACTOR need to make use of th:each-->
 <table class="table">
-    <thead class="thead-dark">
+    <thead class="thead-light">
     <tr>
         <th>Title</th>
         <th>Post</th>
@@ -14,31 +15,15 @@
     </thead>
     <tbody>
     <tr>
-        <th></th>
-        <th></th>
+        <td th:text="${post1.getTitle()}"></td>
+        <td th:text="${post1.getBody()}"></td>
+    </tr>
+    <tr>
+        <td th:text="${post2.getTitle()}"></td>
+        <td th:text="${post2.getBody()}"></td>
     </tr>
     </tbody>
 </table>
 </body>
 </html>
 
-<!--
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</table>
--->
