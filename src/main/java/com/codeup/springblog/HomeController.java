@@ -11,4 +11,10 @@ public class HomeController {
     public String home(){
         return "This is the landing page!";
     }
+
+    //  notice @ResponseBody is not present
+    @GetMapping("/home")
+    public String welcome(){
+        return "home";
+    }
 }
