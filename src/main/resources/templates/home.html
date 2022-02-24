@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <th:block th:include="partials/bootstrap :: styling"/>
+    <th:block th:include="partials/bootstrap :: fontAwesome"/>
 </head>
 <body>
+<!--NAVBAR GOES HERE-->
+<nav th:replace="partials/navbar :: navbar"></nav>
+<!--HEADER FOR PAGE HERE-->
+<header th:replace="partials/header" :: header></header>
 
-    <h1>This is the home page</h1>
+<main class="container">
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+</main>
 
+
+
+
+
+
+
+<!--FOOTER GOES HERE-->
+<footer th:replace="partials/footer" :: footer></footer>
+
+
+
+
+
+<!--NEEDED SCRIPTS GO HERE-->
+<th:block th:include="partials/bootstrap :: scripts"/>
 </body>
 </html>
