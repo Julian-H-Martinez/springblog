@@ -66,7 +66,7 @@ public class HelloController {
     }
 
     @GetMapping("/roll-dice")
-    public String rollDice(){
+    public String rollDice(@RequestParam(name="numPick") int num, Model model){
 
         return "/roll-dice";
     }
