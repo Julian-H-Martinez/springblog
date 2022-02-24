@@ -66,8 +66,16 @@ public class HelloController {
     }
 
     @GetMapping("/roll-dice")
-    public String rollDice(@RequestParam(name="numPick") int num, Model model){
+    public String showRollDice(){
+        return "/roll-dice";
+    }
 
+    @PostMapping("/roll-dice/{n}")
+    public String rollDice(@PathVariable int n, @RequestParam(name="numPick") int num, Model model){
+        double randomNum = Math.floor((Math.random()*6)+1);
+
+        model.addAttribute("num", num);
+        model.addAttribute("n", n);
         return "/roll-dice";
     }
 

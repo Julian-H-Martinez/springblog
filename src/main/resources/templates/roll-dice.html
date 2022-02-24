@@ -6,16 +6,25 @@
     <th:block th:include="partials/bootstrap :: styling"/>
 </head>
 <body>
-<nav th:replace="partials/navbar :: navbar"></nav>
+<!--<nav th:replace="partials/navbar :: navbar"></nav>-->
+<main class="container">
+    <h1 class="text-center">Pick a Number</h1>
+</main>
 <div class="container p-3 d-flex justify-content-around">
-    <button type="button" class="btn btn-primary" name="numPick">Primary</button>
-    <button type="button" class="btn btn-secondary" name="numPick">Secondary</button>
-    <button type="button" class="btn btn-success" name="numPick">Success</button>
-    <button type="button" class="btn btn-danger" name="numPick">Danger</button>
-    <button type="button" class="btn btn-warning" name="numPick">Warning</button>
-    <button type="button" class="btn btn-info" name="numPick">Info</button>
-    <button type="button" class="btn btn-light" name="numPick">Light</button>
-    <button type="button" class="btn btn-dark" name="numPick">Dark</button>
+    <form action="/roll-dice/{n}" method="post">
+        <button type="button" class="btn btn-primary btn-lg" name="numPick" value="1">1</button>
+        <button type="button" class="btn btn-secondary btn-lg" name="numPick" value="2">2</button>
+        <button type="button" class="btn btn-success btn-lg" name="numPick" value="3">3</button>
+        <button type="button" class="btn btn-danger btn-lg" name="numPick" value="4">4</button>
+        <button type="button" class="btn btn-warning btn-lg" name="numPick" value="5">5</button>
+        <button type="button" class="btn btn-info btn-lg" name="numPick" value="6">6</button>
+    </form>
+</div>
+
+<div class="container">
+    <h1 th:text="${num}"></h1>
+    <br>
+    <h1 th:text="${n}"></h1>
 </div>
 <th:block th:include="partials/bootstrap :: scripts"/>
 </body>
