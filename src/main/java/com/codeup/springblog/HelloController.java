@@ -70,12 +70,15 @@ public class HelloController {
         return "/roll-dice";
     }
 
-    @PostMapping("/roll-dice/{n}")
-    public String rollDice(@PathVariable int n, @RequestParam(name="numPick") int num, Model model){
-        double randomNum = Math.floor((Math.random()*6)+1);
-
-        model.addAttribute("num", num);
-        model.addAttribute("n", n);
+    @GetMapping("/roll-dice/{n}")
+    public String rollDice(@PathVariable int n, Model model){
+        int randomNum = (int) (Math.floor((Math.random()*6)+1));
+        boolean doesMatch = (n == randomNum);
+        if(!doesMatch){
+            model.addAttribute("notMatch", randomNum + " does not match " + n);
+        }else{
+            model.addAttribute("match", "Congrats! " + randomNum + " does match " + n);
+        }
         return "/roll-dice";
     }
 

@@ -11,21 +11,27 @@
     <h1 class="text-center">Pick a Number</h1>
 </main>
 <div class="container p-3 d-flex justify-content-around">
-    <form action="/roll-dice/{n}" method="post">
-        <button type="button" class="btn btn-primary btn-lg" name="numPick" value="1">1</button>
-        <button type="button" class="btn btn-secondary btn-lg" name="numPick" value="2">2</button>
-        <button type="button" class="btn btn-success btn-lg" name="numPick" value="3">3</button>
-        <button type="button" class="btn btn-danger btn-lg" name="numPick" value="4">4</button>
-        <button type="button" class="btn btn-warning btn-lg" name="numPick" value="5">5</button>
-        <button type="button" class="btn btn-info btn-lg" name="numPick" value="6">6</button>
-    </form>
+    <a href="/roll-dice/1" class="btn btn-primary btn-lg">1</a>
+    <a href="/roll-dice/2" class="btn btn-primary btn-lg">2</a>
+    <a href="/roll-dice/3" class="btn btn-primary btn-lg">3</a>
+    <a href="/roll-dice/4" class="btn btn-primary btn-lg">4</a>
+    <a href="/roll-dice/5" class="btn btn-primary btn-lg">5</a>
+    <a href="/roll-dice/6" class="btn btn-primary btn-lg">6</a>
 </div>
 
-<div class="container">
-    <h1 th:text="${num}"></h1>
+<div class="container text-center p-3">
+    <h1 th:text="${notMatch}"></h1>
     <br>
-    <h1 th:text="${n}"></h1>
+    <h1 th:text="${match}"></h1>
+    <br>
+    <a href="/roll-dice" class="btn-block">RESET</a>
 </div>
+
+
+
+
+
+
 <th:block th:include="partials/bootstrap :: scripts"/>
 </body>
 </html>
