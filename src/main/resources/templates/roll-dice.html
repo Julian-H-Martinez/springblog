@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Dice</title>
+    <th:block th:include="partials/bootstrap :: styling"/>
+</head>
+<body>
+<!--<nav th:replace="partials/navbar :: navbar"></nav>-->
+<main class="container">
+    <h1 class="text-center">Pick a Number</h1>
+</main>
+<div class="container p-3 d-flex justify-content-around">
+    <a href="/roll-dice/1" class="btn btn-primary btn-lg">1</a>
+    <a href="/roll-dice/2" class="btn btn-primary btn-lg">2</a>
+    <a href="/roll-dice/3" class="btn btn-primary btn-lg">3</a>
+    <a href="/roll-dice/4" class="btn btn-primary btn-lg">4</a>
+    <a href="/roll-dice/5" class="btn btn-primary btn-lg">5</a>
+    <a href="/roll-dice/6" class="btn btn-primary btn-lg">6</a>
+</div>
+
+<div class="container text-center p-3">
+    <h1 th:text="${notMatch}"></h1>
+    <br>
+    <h1 th:text="${match}"></h1>
+    <br>
+    <a href="/roll-dice" class="btn-block">RESET</a>
+</div>
+
+
+
+
+
+
+<th:block th:include="partials/bootstrap :: scripts"/>
+</body>
+</html>

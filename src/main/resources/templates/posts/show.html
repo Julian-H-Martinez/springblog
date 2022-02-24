@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Post</title>
+    <th:block th:include="partials/bootstrap :: styling"/>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<!--utilize foreach-->
+<!--<h1 th:each="post : ${post}">-->
+<!--    <p th:text="${post.getTitle()}"></p>-->
+<!--    <p th:text="${post.getBody()}"></p>-->
+<!--</h1>-->
+
+<h1 th:text="${postTitle}"></h1>
+<h1 th:text="${postBody}"></h1>
+
+
+
+<th:block th:include="partials/bootstrap :: scripts"/>
+</body>
+</html>
