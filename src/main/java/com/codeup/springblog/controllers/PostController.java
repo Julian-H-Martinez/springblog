@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController {
+    //  private final PostRepository postsDao;
+
+    //  public PostController(Post respository postsDao){
+    //      this.postsDao = postsDao;
+    //  }
 
     @GetMapping("/posts")
     public String viewPost(Model model){
