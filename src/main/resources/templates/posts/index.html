@@ -15,8 +15,8 @@
     </thead>
     <tbody >
     <tr th:each="post : ${posts}">
-        <td th:text="${post.getTitle()}"></td>
-        <td th:text="${post.getBody()}"></td>
+        <td th:text="${post.getTitle()}">Card Title</td>
+        <td th:text="${post.getBody()}">Some Example</td>
     </tr>
     </tbody>
 </table>
