@@ -13,14 +13,10 @@
         <th>Post</th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td th:text="${post1.getTitle()}"></td>
-        <td th:text="${post1.getBody()}"></td>
-    </tr>
-    <tr>
-        <td th:text="${post2.getTitle()}"></td>
-        <td th:text="${post2.getBody()}"></td>
+    <tbody >
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.getTitle()}">Card Title</td>
+        <td th:text="${post.getBody()}">Some Example</td>
     </tr>
     </tbody>
 </table>
