@@ -5,6 +5,7 @@ import com.codeup.springblog.models.Genre;
 import com.codeup.springblog.repositories.AuthorRepository;
 import com.codeup.springblog.repositories.BookRepository;
 import com.codeup.springblog.repositories.GenreRepository;
+import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +23,13 @@ public class BookController {
     private BookRepository bookDao;
     private AuthorRepository authorsDao;
     private GenreRepository genresDao;
+    private final EmailService emailService;
 
-    public BookController(BookRepository bookDao, AuthorRepository authorsDao, GenreRepository genresDao) {
+    public BookController(BookRepository bookDao, AuthorRepository authorsDao, GenreRepository genresDao, EmailService emailService) {
         this.bookDao = bookDao;
         this.authorsDao = authorsDao;
         this.genresDao = genresDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/books")
@@ -50,4 +53,9 @@ public class BookController {
         return "redirect:/books";
     }
 
+    @GetMapping("/send-email")
+    public String sendEmail(){
+        emailService.prepareAndSend("Testing", "Did this work");
+        return "redirect:/";
+    }
 }
