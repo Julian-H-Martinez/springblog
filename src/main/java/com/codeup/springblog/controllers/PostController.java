@@ -22,13 +22,6 @@ public class PostController {
       private PostRepository postsDao;
       private UserRepository userDao;
       //    CONTROLLER
-//      public PostController(){}
-//      public PostController(PostRepository postsDao){
-//          this.postsDao = postsDao;
-//      }
-//      public PostController(UserRepository userDao){
-//          this.userDao = userDao;
-//      }
       public PostController(PostRepository postsDao, UserRepository userDao){
           this.postsDao = postsDao;
           this.userDao = userDao;
@@ -54,7 +47,6 @@ public class PostController {
     @PostMapping("/posts/create")
     public String postCreateForm(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
         Post userPost = new Post(title, body);
-//        User user = userDao.getById(4L);
         userPost.setUser(userDao.getById(3L));
         postsDao.save(userPost);
           return "redirect:/posts";
