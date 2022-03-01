@@ -52,12 +52,25 @@ public class PostController {
           return "redirect:/posts";
     }
 
+
+//    @GetMapping("/posts/create")
+//    public String showCreateForm(Model model) {
+//          model.addAttribute("post", new Post());
+//          return "posts/create";
+//    }
     @GetMapping("/posts/{id}/edit")
     public String editForm(@PathVariable long id, Model model){
           Post postToEdit = postsDao.getById(id);
           model.addAttribute("postToEdit", postToEdit);
           return "posts/edit";
     }
+
+//    @PostMapping("/posts/create")
+//    public String postCreateForm(@ModelAttribute Post post){
+//          post.setUser(userDao.getById(2L));
+//          postsDao.save(post);
+//          return "redirect:/posts";
+//    }
 
     // We can access the values submitted from the form using our @RequestParam annotation
     @PostMapping("/posts/{id}/edit")
