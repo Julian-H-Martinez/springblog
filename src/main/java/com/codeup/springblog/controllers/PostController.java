@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +20,19 @@ public class PostController {
     //      initialize it in the controller class constructor.
         //  PROPERTY
       private PostRepository postsDao;
+      private UserRepository userDao;
       //    CONTROLLER
+      public PostController(){}
       public PostController(PostRepository postsDao){
           this.postsDao = postsDao;
       }
+      public PostController(PostRepository postsDao, UserRepository userDao){
+          this.postsDao = postsDao;
+          this.userDao = userDao;
+      }
+//      public UserController(UserRepository userDao){
+//          this.userDao = userDao;
+//      }
 
     @GetMapping("/posts")
     public String viewPost(Model model){
@@ -54,6 +65,11 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postCreateForm(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+//        User user = userDao.getById(1L);
+        Post post = new Post();
+        post.setTitle("Testing");
+        post.setBody("Body of test");
+//        post.setUser(user);
         Post userPost = new Post(title, body);
         postsDao.save(userPost);
           return "redirect:/posts";
