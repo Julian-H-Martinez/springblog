@@ -65,10 +65,9 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postCreateForm(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-        User user = userDao.getById(4L);
-        System.out.println(user);
+//        User user = userDao.getById(4L);
         Post userPost = new Post(title, body);
-        userPost.setUser(user);
+//        userPost.setUser(user);
         postsDao.save(userPost);
           return "redirect:/posts";
     }
