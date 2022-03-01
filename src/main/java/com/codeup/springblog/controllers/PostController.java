@@ -52,36 +52,21 @@ public class PostController {
           return "redirect:/posts";
     }
 
-
-//    @GetMapping("/posts/create")
-//    public String showCreateForm(Model model) {
-//          model.addAttribute("post", new Post());
-//          return "posts/create";
-//    }
     @GetMapping("/posts/{id}/edit")
     public String editForm(@PathVariable long id, Model model){
           Post postToEdit = postsDao.getById(id);
-          model.addAttribute("postToEdit", postToEdit);
+          model.addAttribute("edit", postToEdit);
           return "posts/edit";
     }
 
-//    @PostMapping("/posts/create")
-//    public String postCreateForm(@ModelAttribute Post post){
-//          post.setUser(userDao.getById(2L));
-//          postsDao.save(post);
-//          return "redirect:/posts";
-//    }
-
     // We can access the values submitted from the form using our @RequestParam annotation
     @PostMapping("/posts/{id}/edit")
-    public String submitEdit(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id){
+    public String submitEdit(@ModelAttribute Post post, @PathVariable long id){
         // grab the post from our DAO
-          Post editPost = postsDao.getById(id);
+//          Post editPost = postsDao.getById(id);
         // use setters to set new values to the object
-          editPost.setTitle(title);
-          editPost.setBody(body);
         // save the object with new values
-          postsDao.save(editPost);
+          postsDao.save(post);
           return "redirect:/posts";
     }
 

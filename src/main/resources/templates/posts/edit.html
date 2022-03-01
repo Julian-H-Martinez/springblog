@@ -6,14 +6,15 @@
     <th:block th:include="partials/bootstrap :: styling"></th:block>
 </head>
 <body>
-<form th:action="@{/posts/{id}/edit (id = ${postToEdit.getId()})}" th:method="POST" th:object="${postToEdit}">
+<form th:action="@{/posts/{id}/edit (id = ${edit.getId()})}" th:method="POST" th:object="${edit}">
     <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" th:field="*{title}" th:value="${postToEdit.getTitle()}">
+        <input type="text" class="form-control" id="title" th:field="*{title}" th:value="${edit.getTitle()}">
     </div>
+    <input type="hidden" th:value="${edit.getId()}" th:field="*{id}">
     <div class="form-group">
         <label for="body">Content</label>
-        <textarea class="form-control" id="body" rows="3" th:field="*{body}" th:text="${postToEdit.getBody()}"></textarea>
+        <textarea class="form-control" id="body" rows="3" th:field="*{body}" th:text="${edit.getBody()}"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
