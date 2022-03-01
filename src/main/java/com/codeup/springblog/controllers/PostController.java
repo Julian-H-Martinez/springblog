@@ -26,13 +26,13 @@ public class PostController {
       public PostController(PostRepository postsDao){
           this.postsDao = postsDao;
       }
+      public PostController(UserRepository userDao){
+          this.userDao = userDao;
+      }
       public PostController(PostRepository postsDao, UserRepository userDao){
           this.postsDao = postsDao;
           this.userDao = userDao;
       }
-//      public UserController(UserRepository userDao){
-//          this.userDao = userDao;
-//      }
 
     @GetMapping("/posts")
     public String viewPost(Model model){
@@ -65,12 +65,10 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postCreateForm(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-//        User user = userDao.getById(1L);
-        Post post = new Post();
-        post.setTitle("Testing");
-        post.setBody("Body of test");
-//        post.setUser(user);
+        User user = userDao.getById(4L);
+        System.out.println(user);
         Post userPost = new Post(title, body);
+        userPost.setUser(user);
         postsDao.save(userPost);
           return "redirect:/posts";
     }
