@@ -7,9 +7,13 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
+    <h1 th:text="${singlePost.getTitle()}"></h1>
+    <h1 th:text="${singlePost.getBody()}"></h1>
+    <h5>You can email this user at: <span th:text="${singlePost.getUser().getEmail()}"></span> </h5>
+</div>
 
-<h1 th:text="${singlePost.getTitle()}"></h1>
-<h1 th:text="${singlePost.getBody()}"></h1>
+
 
 
 
