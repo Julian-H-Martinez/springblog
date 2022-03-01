@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,32 +20,29 @@ public class PostController {
     //      initialize it in the controller class constructor.
         //  PROPERTY
       private PostRepository postsDao;
+      private UserRepository userDao;
       //    CONTROLLER
-      public PostController(PostRepository postsDao){
+//      public PostController(){}
+//      public PostController(PostRepository postsDao){
+//          this.postsDao = postsDao;
+//      }
+//      public PostController(UserRepository userDao){
+//          this.userDao = userDao;
+//      }
+      public PostController(PostRepository postsDao, UserRepository userDao){
           this.postsDao = postsDao;
+          this.userDao = userDao;
       }
 
     @GetMapping("/posts")
     public String viewPost(Model model){
-          List<Post> allPosts = new ArrayList<>();
-          Post titansPost = new Post(1, "Titans Year 2022", "Bold prediction for 2022 NFL Season, Tennessee Titans will win the Super Bowl!");
-          Post cowboysPost = new Post(2, "Cowboys Super Bowl or Bust", "Cowboys need a trip to the Super Bowl or that's it for Big Mike McCarthy!");
-          Post spursPost = new Post(3, "Spurs Making Moves", "Looks like the Spurs made quite the splash before trade deadline! Chanpionship push?");
-          
-          allPosts.add(titansPost);
-          allPosts.add(cowboysPost);
-          allPosts.add(spursPost);
-
-          model.addAttribute("posts", allPosts);
+          model.addAttribute("posts", postsDao.findAll());
         return "/posts/index";
     }
 
     @GetMapping("/posts/{id}")
     public String postDetails(@PathVariable long id, Model model){
-        Post post1 = new Post(10, "Learning New Things", "Currently in a Full-Stack Web Developer for Java at Codeup! Each day is a learning " +
-                "experience" +
-                " and look forward to continuing my growth!");
-        model.addAttribute("singlePost", post1);
+        model.addAttribute("singlePost", postsDao.getById(id));
         return "posts/show";
     }
 
@@ -55,6 +54,8 @@ public class PostController {
     @PostMapping("/posts/create")
     public String postCreateForm(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
         Post userPost = new Post(title, body);
+//        User user = userDao.getById(4L);
+        userPost.setUser(userDao.getById(3L));
         postsDao.save(userPost);
           return "redirect:/posts";
     }
