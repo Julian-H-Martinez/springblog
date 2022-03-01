@@ -59,16 +59,23 @@ public class PostController {
           return "posts/edit";
     }
 
+    // We can access the values submitted from the form using our @RequestParam annotation
     @PostMapping("/posts/{id}/edit")
     public String submitEdit(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @PathVariable long id){
+        // grab the post from our DAO
           Post editPost = postsDao.getById(id);
+        // use setters to set new values to the object
           editPost.setTitle(title);
           editPost.setBody(body);
-
+        // save the object with new values
           postsDao.save(editPost);
           return "redirect:/posts";
     }
 
+    // For now, we need to use a GetMapping, that way, when we visit the page,
+    // our app can access the path variable,
+    // then delete the post,
+    // then redirect us back to the post index page.
     @GetMapping("/posts/{id}/delete")
     public String deletePost(@PathVariable long id){
           Post deletePost = postsDao.getById(id);
