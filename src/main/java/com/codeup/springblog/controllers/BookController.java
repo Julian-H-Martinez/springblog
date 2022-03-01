@@ -42,6 +42,7 @@ public class BookController {
         return "books/create";
     }
 
+    //  we can now tell form to expect object because of request in showCreateForm
     @PostMapping("/books/create")
     public String createBook(@ModelAttribute Book book) {
         book.setAuthor(authorsDao.getById(1L));
