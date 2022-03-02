@@ -29,6 +29,7 @@ public class PostController {
           this.emailService = emailService;
       }
 
+    //  R -> READ
     @GetMapping("/posts")
     public String viewPost(Model model){
           model.addAttribute("posts", postsDao.findAll());
@@ -41,6 +42,7 @@ public class PostController {
         return "posts/show";
     }
 
+    //  C -> CREATE
     @GetMapping("/posts/create")
     public String showCreateForm(Model model) {
           model.addAttribute("post", new Post());
@@ -49,12 +51,14 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postCreateForm(@ModelAttribute Post post){
-          post.setUser(userDao.getById(2L));
+          User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+          post.setUser(userDao.getById(loggedInUser.getId()));
           emailService.prepareAndSend(post, "New Post", "You just posted to the blog.");
           postsDao.save(post);
           return "redirect:/posts";
     }
-//  EDIT
+
+    //  U -> UPDATE/EDIT
     @GetMapping("/posts/{id}/edit")
     public String editForm(@PathVariable long id, Model model){
           Post postToEdit = postsDao.getById(id);
@@ -77,6 +81,8 @@ public class PostController {
           postsDao.save(post);
           return "redirect:/posts";
     }
+
+    //  D -> DELETE
 
     // For now, we need to use a GetMapping, that way, when we visit the page,
     // our app can access the path variable,
