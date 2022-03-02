@@ -6,6 +6,7 @@
     <th:block th:include="partials/bootstrap :: styling"></th:block>
 </head>
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
 <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
     <div class="form-group">
         <label for="title">Title</label>
