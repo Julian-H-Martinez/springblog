@@ -51,6 +51,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String postCreateForm(@ModelAttribute Post post){
           post.setUser(userDao.getById(2L));
+          emailService.prepareAndSend(post, "New Post", "You just posted to the blog.");
           postsDao.save(post);
           return "redirect:/posts";
     }
