@@ -11,11 +11,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 150)
-    private String first_name;
-
-    @Column(nullable = false, length = 150)
-    private String last_name;
+//    @Column(nullable = false, length = 150)
+//    private String first_name;
+//
+//    @Column(nullable = false, length = 150)
+//    private String last_name;
 
     @Column(nullable = false, length = 100, unique = true)
     private String username;
@@ -32,31 +32,62 @@ public class User {
     //  CONSTRUCTORS
     public User(){};
 
-    public User(String first_name, String last_name, String username, String email, String password) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(long id, String first_name, String last_name, String username, String email, String password) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(long id, String first_name, String last_name, String username, String email, String password, List<Post> posts) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public User(String username, String email, String password, List<Post> posts) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.posts = posts;
+    }
+
+//    public User(String first_name, String last_name, String username, String email, String password) {
+//        this.first_name = first_name;
+//        this.last_name = last_name;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//    }
+
+
+    public User(long id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+//    public User(long id, String first_name, String last_name, String username, String email, String password) {
+//        this.id = id;
+//        this.first_name = first_name;
+//        this.last_name = last_name;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//    }
+
+    public User(long id, String username, String email, String password, List<Post> posts) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.posts = posts;
+    }
+
+//    public User(long id, String first_name, String last_name, String username, String email, String password, List<Post> posts) {
+//        this.id = id;
+//        this.first_name = first_name;
+//        this.last_name = last_name;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//        this.posts = posts;
+//    }
+
+    //  use as alternative to clone
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
     }
 
     //  GETTERS/SETTERS
@@ -67,18 +98,18 @@ public class User {
     public void setId(long id) {
         this.id = id;
     }
-    public String getFirst_name() {
-        return first_name;
-    }
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-    public String getLast_name() {
-        return last_name;
-    }
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
+//    public String getFirst_name() {
+//        return first_name;
+//    }
+//    public void setFirst_name(String first_name) {
+//        this.first_name = first_name;
+//    }
+//    public String getLast_name() {
+//        return last_name;
+//    }
+//    public void setLast_name(String last_name) {
+//        this.last_name = last_name;
+//    }
     public String getUsername() {
         return username;
     }

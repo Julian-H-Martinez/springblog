@@ -5,12 +5,11 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class PostController {
@@ -33,7 +32,7 @@ public class PostController {
     @GetMapping("/posts")
     public String viewPost(Model model){
           model.addAttribute("posts", postsDao.findAll());
-        return "/posts/index";
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
@@ -55,12 +54,17 @@ public class PostController {
           postsDao.save(post);
           return "redirect:/posts";
     }
-
+//  EDIT
     @GetMapping("/posts/{id}/edit")
     public String editForm(@PathVariable long id, Model model){
           Post postToEdit = postsDao.getById(id);
-          model.addAttribute("edit", postToEdit);
-          return "posts/edit";
+          User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+          if(postToEdit.getUser().getId() == loggedInUser.getId()){
+              model.addAttribute("edit", postToEdit);
+              return "posts/edit";
+          }else{
+              return "redirect:/posts";
+          }
     }
 
     // We can access the values submitted from the form using our @RequestParam annotation
