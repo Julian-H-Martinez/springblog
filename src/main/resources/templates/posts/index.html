@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Show All Posts</title>
+    <th:block th:include="partials/bootstrap :: styling"/>
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
@@ -21,6 +22,8 @@
     </tr>
     </tbody>
 </table>
+
+<th:block th:include="partials/bootstrap :: scripts"/>
 </body>
 </html>
 
