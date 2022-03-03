@@ -74,11 +74,13 @@ public class PostController {
     // We can access the values submitted from the form using our @RequestParam annotation
     @PostMapping("/posts/{id}/edit")
     public String submitEdit(@ModelAttribute Post post, @PathVariable long id){
-        // grab the post from our DAO
-//          Post editPost = postsDao.getById(id);
-        // use setters to set new values to the object
-        // save the object with new values
-          postsDao.save(post);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+          if(postsDao.getById(id).getUser().getId() == loggedInUser.getId()){
+              post.setUser(userDao.getById(loggedInUser.getId()));
+              emailService.prepareAndSend(post, "Post Edit", "You just edited a blog post.");
+              postsDao.save(post);
+              return "redirect:/posts";
+          }
           return "redirect:/posts";
     }
 
