@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit </title>
+    <th:block th:include="partials/bootstrap :: styling"></th:block>
+</head>
+<body>
+<!--th:object corresponds to new object being created in Controller-->
+<!--referenced on showCreateForm as model.addAttribute-->
+<form th:action="@{/books/{id}/edit (id=${bookToEdit.getId()})}" th:method="POST" th:object="${bookToEdit}">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <!--name attribute can be replaced by th:field for Form Model Binding-->
+        <!--th:field fields represent property of object-->
+        <input type="text" class="form-control" id="title" name="title" th:field="*{title}">
+<!--        <span th:each="genre : ${genres}">-->
+<!--            <input type="checkbox" th:field="*{genres}" th:id="genre + ${genre.id}" th:value="${genre.id}">-->
+<!--            <label th:for="genre + ${genre.id}" th:text="${genre.name}"></label>-->
+<!--        </span>-->
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+<th:block th:replace="partials/bootstrap :: scripts"></th:block>
+</body>
+</html>
