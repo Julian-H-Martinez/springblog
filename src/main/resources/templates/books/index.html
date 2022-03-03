@@ -5,6 +5,7 @@
     <title>Library</title>
 </head>
 <body>
+<h1>Notable Books</h1>
 <ul>
     <li th:each="book : ${allBooks}">
         <u th:text="${book.title}"></u> by <span th:text="${book.author.name}"></span><span th:each="genre : ${book.genres}"> [<span th:text="${genre.name}"></span>] </span>

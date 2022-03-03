@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     // Will return a SINGLE book with the matching title.
-//    Book findBookByTitle();
-//
+    Book findBookByTitle(String title);
 //
 //    // Custom queries may require you to use the @Query annotation, this uses HQL syntax.
 //    @Query("from Book b where b.title like %:bookTitle%")

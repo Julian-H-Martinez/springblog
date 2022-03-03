@@ -8,10 +8,7 @@ import com.codeup.springblog.repositories.GenreRepository;
 import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -38,6 +35,12 @@ public class BookController {
         return "books/index";
     }
 
+    @GetMapping("/books/{id}")
+    public String showBook(@PathVariable long id, Model model){
+        model.addAttribute("singleBook", bookDao.getById(id));
+        return "books/showOne";
+    }
+
     @GetMapping("/books/create")
     public String showCreateForm(Model model) {
         model.addAttribute("book", new Book());
@@ -50,6 +53,27 @@ public class BookController {
     public String createBook(@ModelAttribute Book book) {
         book.setAuthor(authorsDao.getById(1L));
         bookDao.save(book);
+        return "redirect:/books";
+    }
+
+    @GetMapping("/books/{id}/edit")
+    public String editForm(@PathVariable long id, Model model) {
+        model.addAttribute("bookToEdit", bookDao.getById(id));
+        return "books/edit";
+    }
+
+    //  we can now tell form to expect object because of request in showCreateForm
+    @PostMapping("/books/{id}/edit")
+    public String editBook(@ModelAttribute Book book, @PathVariable long id) {
+        book.setAuthor(authorsDao.getById(1L));
+        bookDao.save(book);
+        return "redirect:/books/" + id;
+    }
+
+    //  DELETE
+    @GetMapping("/books/{id}/delete")
+    public String deleteBook(@PathVariable long id){
+        bookDao.delete(bookDao.getById(id));
         return "redirect:/books";
     }
 
