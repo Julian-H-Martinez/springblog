@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -67,7 +69,7 @@ public class PostsIntegrationTests {
                 .getRequest()
                 .getSession();
     }
-
+    //  SANITY TESTS
     @Test
     public void contextLoads(){
         assertNotNull(mvc);     //  checking MVC bean is working
@@ -84,12 +86,16 @@ public class PostsIntegrationTests {
     @Test
     public void testPostsIndex() throws Exception{
         //  grab all posts
-        Post existingPosts = postDao.findAll().get(0);
-
+        List<Post> posts = postDao.findAll();
         this.mvc.perform(get("/posts"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Community Posts")))
-                .andExpect(content().string(containsString(existingPosts.getTitle())));
+                .andExpect(content().string(containsString("Community Posts")));
+        for(Post post : posts){
+            this.mvc.perform(get("/posts"))
+                    .andExpect(status().isOk())
+                    .andExpect(content().string(containsString(post.getTitle())));
+        }
+
     }
     //  single post can be shown when visiting /posts/{id}
 //    @Test
@@ -121,6 +127,12 @@ public class PostsIntegrationTests {
     //  httpSession needed for user to be authenticated and create
     @Test
     public void testCreatePost() throws Exception{
+        //  Testing without user login
+        this.mvc.perform(post("/posts/create")
+                        .param("title", "This is just a test post")
+                        .param("body", "Will be deleted after tests are completed!"))
+                .andExpect(status().isForbidden());
+        //  Testing with user login
         this.mvc.perform(post("/posts/create").with(csrf())
                 .session((MockHttpSession) httpSession)
                 .param("title", "This is just a test post")
